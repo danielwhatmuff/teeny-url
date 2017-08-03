@@ -1,0 +1,10 @@
+*.zip
+.idea
+_build/*
+_build
+*/_build/*
+*.swp
+*.swo
+__pycache__/
+*.py[cod]
+*$py.class

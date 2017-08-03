@@ -1,0 +1,17 @@
+lambdas:
+  generate:
+    code: code
+    handler: generate.handler
+    runtime: python2.7
+    description: Function to create teeny url from a long one
+    timeout: 30
+    memory: 128
+    policies:
+      sns:
+        Version: "2012-10-17"
+        Statement:
+          -
+            Action:
+              - "s3:PutObject"
+            Resource: "arn:aws:s3:::teenyurl/*"
+            Effect: "Allow"

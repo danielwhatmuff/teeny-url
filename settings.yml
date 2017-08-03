@@ -1,0 +1,26 @@
+---
+project: teenyurl
+default-region: ap-southeast-2
+code-bucket: yourbucket
+apps:
+  - gordon.contrib.lambdas
+  - teenyurl
+events:
+  keepwarm:
+    description: 'Trigger the function every minute to keep it warm'
+    state: ENABLED
+    schedule_expression: cron(*/1 * ? * * *)
+    targets:
+      teenyurl:
+        lambda: teenyurl.generate
+apigateway:
+  teenyurl:
+    description: Gateway to expose generation function
+      resources:
+        /url:
+          methods: POST
+            integration:
+              lambda: teenyurl.generate
+                responses:
+                  - pattern: ""
+                    code: "200"
